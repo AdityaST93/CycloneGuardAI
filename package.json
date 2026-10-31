@@ -1,0 +1,10 @@
+{
+  "name": "cycloneguard-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CycloneGuard AI weather and natural-disaster intelligence dashboard",
+  "scripts": {
+    "start": "node server.js",
+    "models:train": "python ai-models/model_training.py"
+  }
+}

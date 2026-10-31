@@ -1,0 +1,3 @@
+'use strict';
+async function recentEvents(days=8){const span=Math.max(1,Math.min(30,Number(days)||8)),to=new Date(),from=new Date(Date.now()-span*86400000),fmt=d=>d.toISOString().slice(0,10);const url=new URL('https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH');url.search=new URLSearchParams({eventlist:'TC;FL;EQ;WF;VO',fromdate:fmt(from),todate:fmt(to)});const response=await fetch(url,{signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});if(!response.ok)throw Object.assign(new Error('GDACS feed unavailable.'),{status:502});const data=await response.json();return {provider:'GDACS',fetchedAt:new Date().toISOString(),features:data.features||data.FeatureCollection?.features||[]};}
+module.exports={recentEvents};
